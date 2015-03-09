@@ -48,19 +48,19 @@ public class SelectMyServlet extends HttpServlet {
                 id = rs.getString("id");
                 name = rs.getString("name");
                 sex = rs.getString("sex");
-                // writer.append("id = " + id + " name = " + name + " sex = " + sex);
+                
                 writer.append("<tr>");
-                writer.append("<td>");
-                writer.append(id);
-                writer.append("</td>");
+                    writer.append("<td>");
+                        writer.append(id);
+                    writer.append("</td>");
 
-                writer.append("<td>");
-                writer.append(name);
-                writer.append("</td>");
+                    writer.append("<td>");
+                        writer.append(name);
+                    writer.append("</td>");
 
-                writer.append("<td>");
-                writer.append(sex);
-                writer.append("</td>");
+                    writer.append("<td>");
+                        writer.append(sex);
+                    writer.append("</td>");
                 writer.append("</tr>");
             }
 
