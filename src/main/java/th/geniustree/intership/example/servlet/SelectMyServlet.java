@@ -30,16 +30,42 @@ public class SelectMyServlet extends HttpServlet {
             connection = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test", "sa", null);
             Statement createStatement = connection.createStatement();
             ResultSet rs = createStatement.executeQuery("SELECT * FROM TEST ");
+            PrintWriter writer = resp.getWriter();
+            writer.append("<html><body>");
+            writer.append("<table border = 1>");
+                writer.append("<tr>");
+                    writer.append("<th>");
+                        writer.append("id :");
+                    writer.append("</th>");
+                    writer.append("<th>");
+                        writer.append("name :");
+                    writer.append("</th>");
+                    writer.append("<th>");
+                        writer.append("sex :");
+                    writer.append("</th>");
+                writer.append("</tr>");
             while (rs.next()) {
                 id = rs.getString("id");
                 name = rs.getString("name");
-                //sex = rs.getString("sex");
-                System.out.println("id = " + id + " name = " + name + " sex = " + sex);
-                PrintWriter writer = resp.getWriter();
-                writer.append("it done! " + rs);
-            }
-            
+                sex = rs.getString("sex");
+                // writer.append("id = " + id + " name = " + name + " sex = " + sex);
+                writer.append("<tr>");
+                writer.append("<td>");
+                writer.append(id);
+                writer.append("</td>");
 
+                writer.append("<td>");
+                writer.append(name);
+                writer.append("</td>");
+
+                writer.append("<td>");
+                writer.append(sex);
+                writer.append("</td>");
+                writer.append("</tr>");
+            }
+
+            writer.append("</table>");
+            writer.append("</body></html>");
         } catch (Exception ex) {
             Logger.getLogger(MyServlet.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

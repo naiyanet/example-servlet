@@ -25,15 +25,17 @@ public class MyServlet extends HttpServlet{
         String sex = req.getParameter("sex");
         System.out.println(id+" "+name+" "+sex);
         Connection connection = null;
+        PrintWriter writer = resp.getWriter();
         try {
             Class.forName("org.h2.Driver");
-            connection = DriverManager.getConnection("jdbc:h2:~/test","sa",null);
+            connection = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test","sa",null);
             Statement createStatement = connection.createStatement();
             int rs = createStatement.executeUpdate("INSERT INTO TEST (ID,NAME,SEX) VALUES ('"+id+"','"+name+"','"+sex+"')");
-            PrintWriter writer = resp.getWriter();
+            
             writer.append("insert rows = "+rs);
         } catch (Exception ex) {
             Logger.getLogger(MyServlet.class.getName()).log(Level.SEVERE, null, ex);
+            writer.append(ex.getMessage());
         }finally{
             if(connection != null){
                 try {
@@ -44,5 +46,10 @@ public class MyServlet extends HttpServlet{
             }
         }
     };
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
