@@ -23,6 +23,10 @@ public class MyServlet extends HttpServlet{
         String id = req.getParameter("id");
         String name = req.getParameter("name");
         String sex = req.getParameter("sex");
+        String[] parameterValues = req.getParameterValues("check");
+        String header = req.getHeader("User-Agent");
+        System.out.println(header);
+        System.out.println(parameterValues.length);
         System.out.println(id+" "+name+" "+sex);
         Connection connection = null;
         PrintWriter writer = resp.getWriter();
